@@ -1,0 +1,34 @@
+{
+  "name": "database-setup-seeding",
+  "version": "1.0.0",
+  "description": "Cypress test setup with database seeding using fixtures and custom commands",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "test:server": "NODE_ENV=test node server.js",
+    "kill-port": "bash scripts/kill-port.sh",
+    "kill-port:3000": "bash scripts/kill-port.sh 3000",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "npm run test:server & sleep 2 && cypress run",
+    "test:open": "npm run test:server & sleep 2 && cypress open"
+  },
+  "keywords": [
+    "cypress",
+    "testing",
+    "database",
+    "seeding",
+    "fixtures"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "cypress": "^13.0.0"
+  }
+}
+

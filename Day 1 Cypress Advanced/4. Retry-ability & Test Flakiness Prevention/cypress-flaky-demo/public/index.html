@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cypress Flaky Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #spinner { display: none; }
+    .hidden { display: none; }
+    .user-item { margin: 4px 0; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Cypress Flaky Demo</h1>
+
+  <!-- SECTION 1: Dynamic Users -->
+  <section>
+    <h2>Users (dynamic API)</h2>
+    <button id="loadUsersBtn" data-testid="load-users-btn">Load Users</button>
+    <div id="spinner" data-testid="spinner">Loading...</div>
+    <ul id="userList" data-testid="user-list"></ul>
+  </section>
+
+  <hr />
+
+  <!-- SECTION 2: Unstable API -->
+  <section>
+    <h2>Unstable API (random success/failure)</h2>
+    <button id="checkStatusBtn" data-testid="check-status-btn">
+      Check Random Status
+    </button>
+    <p id="statusMessage" data-testid="status-message"></p>
+  </section>
+
+  <script>
+    const loadUsersBtn = document.getElementById('loadUsersBtn');
+    const spinner = document.getElementById('spinner');
+    const userList = document.getElementById('userList');
+
+    const checkStatusBtn = document.getElementById('checkStatusBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+    // Load users with spinner
+    loadUsersBtn.addEventListener('click', () => {
+      userList.innerHTML = '';
+      spinner.style.display = 'block';
+
+      fetch('/api/users')
+        .then((res) => res.json())
+        .then((users) => {
+          spinner.style.display = 'none';
+          users.forEach((u) => {
+            const li = document.createElement('li');
+            li.textContent = u.name;
+            li.classList.add('user-item');
+            li.setAttribute('data-testid', 'user-item');
+            userList.appendChild(li);
+          });
+        });
+    });
+
+    // Call unstable API
+    checkStatusBtn.addEventListener('click', () => {
+      statusMessage.textContent = 'Checking...';
+      statusMessage.classList.remove('error');
+
+      fetch('/api/random-status')
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Server error');
+          }
+          return res.json();
+        })
+        .then((data) => {
+          statusMessage.textContent = data.message;
+        })
+        .catch(() => {
+          statusMessage.textContent = 'Error from server';
+          statusMessage.classList.add('error');
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sales Charts</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .charts { display: flex; gap: 40px; }
+    .chart-container { flex: 1; }
+    #sales-table td, #sales-table th {
+      border: 1px solid #ccc;
+      padding: 4px 8px;
+    }
+    #sales-table {
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    svg { border: 1px solid #ccc; }
+    .bar { fill: steelblue; }
+  </style>
+</head>
+<body>
+  <h1>Sales Dashboard</h1>
+
+  <div class="charts">
+    <div class="chart-container">
+      <h2>Canvas Chart (Chart.js)</h2>
+      <canvas id="salesCanvas" width="400" height="300"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h2>SVG Bar Chart</h2>
+      <svg id="salesSvg" width="400" height="300"></svg>
+    </div>
+  </div>
+
+  <h2>Sales CRUD</h2>
+  <form id="sales-form">
+    <input id="label-input" placeholder="Month (e.g. Apr)" required />
+    <input id="amount-input" type="number" placeholder="Amount" required />
+    <button type="submit">Add Sale</button>
+  </form>
+
+  <table id="sales-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Label</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="app.js"></script>
+</body>
+</html>
