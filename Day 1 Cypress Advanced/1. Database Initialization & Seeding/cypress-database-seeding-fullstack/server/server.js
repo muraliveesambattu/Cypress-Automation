@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from public directory
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize database connection
 db.connect().catch(err => {
@@ -70,7 +70,7 @@ app.get('/api/items/:id', async (req, res) => {
 app.post('/api/items', async (req, res) => {
   try {
     const { name, description } = req.body;
-    
+
     if (!name || name.trim() === '') {
       return res.status(400).json({ success: false, error: 'Name is required' });
     }
@@ -114,7 +114,8 @@ app.delete('/api/items/:id', async (req, res) => {
 
 // Root route - serve the frontend
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  // res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.send({ msg: "Backend Working fine !!" })
 });
 
 // Start server
