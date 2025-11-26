@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "test:server": "NODE_ENV=test node server.js",
+    "kill-port": "bash scripts/kill-port.sh",
+    "kill-port:3000": "bash scripts/kill-port.sh 3000",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "npm run test:server & sleep 2 && cypress run",
+    "test:open": "npm run test:server & sleep 2 && cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}
