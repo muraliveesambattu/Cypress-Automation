@@ -10,6 +10,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^15.7.0"
+    "axe-core": "^4.11.0",
+    "cypress": "^15.7.0",
+    "cypress-axe": "^1.7.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
