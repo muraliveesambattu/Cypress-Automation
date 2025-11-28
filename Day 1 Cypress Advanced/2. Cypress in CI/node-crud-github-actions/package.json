@@ -1,0 +1,25 @@
+{
+  "name": "crud-github-actions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "start-server-and-test start http://localhost:3000 cypress:run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "cypress": "^15.7.0",
+    "nodemon": "^3.1.11",
+    "start-server-and-test": "^2.1.3"
+  }
+}

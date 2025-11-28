@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple CRUD App</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    input {
+      margin: 5px;
+      padding: 8px;
+    }
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .user-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple CRUD App (Frontend) - With Jenkins Updated 12</h1>
+
+  <h3>Create User</h3>
+  <input id="name" type="text" placeholder="Name" />
+  <input id="email" type="email" placeholder="Email" />
+  <button onclick="createUser()">Create</button>
+
+  <h3>Users List</h3>
+  <div id="users"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

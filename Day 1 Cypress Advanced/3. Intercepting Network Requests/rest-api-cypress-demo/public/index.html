@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Users List</title>
+</head>
+<body>
+  <h1>Users</h1>
+  <button id="load-users">Load Users</button>
+  <ul id="users-list"></ul>
+
+  <script>
+    const btn = document.getElementById("load-users");
+    const list = document.getElementById("users-list");
+
+    btn.addEventListener("click", async () => {
+      list.innerHTML = "<li>Loading...</li>";
+
+      try {
+        const res = await fetch("/users");
+        const data = await res.json();
+        list.innerHTML = "";
+        data.forEach((user) => {
+          const li = document.createElement("li");
+          li.textContent = `${user.id} - ${user.name} (${user.age})`;
+          list.appendChild(li);
+        });
+      } catch (err) {
+        list.innerHTML = "<li>Error loading users</li>";
+      }
+    });
+  </script>
+</body>
+</html>

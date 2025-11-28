@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User CRUD</title>
+  <meta charset="utf-8" />
+</head>
+<body>
+  <h1>User CRUD App</h1>
+
+  <form id="user-form">
+    <input id="name" placeholder="Name" />
+    <input id="email" placeholder="Email" />
+    <button type="submit">Add User</button>
+  </form>
+
+  <ul id="user-list"></ul>
+
+  <script>
+    const API_BASE = "http://localhost:3000/api/users";
+
+    const form = document.getElementById("user-form");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const list = document.getElementById("user-list");
+
+    async function fetchUsers() {
+      const res = await fetch(API_BASE);
+      const data = await res.json();
+      list.innerHTML = "";
+      data.forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = `${user.name} - ${user.email}`;
+        li.setAttribute("data-id", user.id);
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.addEventListener("click", async () => {
+          await fetch(`${API_BASE}/${user.id}`, { method: "DELETE" });
+          fetchUsers();
+        });
+
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+
+      if (!name || !email) return;
+
+      await fetch(API_BASE, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email })
+      });
+
+      nameInput.value = "";
+      emailInput.value = "";
+      fetchUsers();
+    });
+
+    fetchUsers();
+  </script>
+</body>
+</html>
