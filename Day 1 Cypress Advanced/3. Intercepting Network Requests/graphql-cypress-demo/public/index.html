@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>GraphQL Demo</title>
+  </head>
+  <body>
+    <h1>GraphQL Users Demo</h1>
+    <button id="load-users">Load Users</button>
+    <pre id="output"></pre>
+
+    <script>
+      document
+        .getElementById('load-users')
+        .addEventListener('click', () => {
+          const query = `
+            query GetUsers {
+              users {
+                id
+                name
+                age
+                isMarried
+              }
+            }
+          `;
+
+          fetch('/graphql', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              document.getElementById('output').textContent =
+                JSON.stringify(data, null, 2);
+            })
+            .catch((err) => {
+              console.error(err);
+              document.getElementById('output').textContent =
+                'Error: ' + err.message;
+            });
+        });
+    </script>
+  </body>
+</html>
